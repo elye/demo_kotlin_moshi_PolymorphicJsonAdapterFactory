@@ -9,18 +9,18 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import java.lang.reflect.ParameterizedType
 
 fun main() {
-//    simpleBase()
-//    simpleAbstract()
-//    simpleInterface()
-//    sealedBase()
-//    sealedInterfaceBase()
-//
-//    sealedInterfaceTypeBase()
+    simpleBase()
+    simpleAbstract()
+    simpleInterface()
+    sealedBase()
+    sealedInterfaceBase()
+
+    sealedInterfaceTypeBase()
     abstractTypeBase()
 
-//    normalMoshiSerialization()
-//    abstractMoshiSerialization()
-//    singleAbstractMoshiSerialization()
+    normalMoshiSerialization()
+    abstractMoshiSerialization()
+    singleAbstractMoshiSerialization()
 }
 
 private fun sealedInterfaceTypeBase() {
