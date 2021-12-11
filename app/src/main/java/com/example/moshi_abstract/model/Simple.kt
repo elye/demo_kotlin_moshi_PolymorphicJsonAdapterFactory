@@ -55,6 +55,7 @@ data class ThirdChild (
     override val type: BaseType = BaseType.ThirdType
 }
 
+
 abstract class BaseTypeAbstract(val type: BaseType)
 
 data class FirstAbstractChild (val strMsg: String):
@@ -65,6 +66,7 @@ data class SecondAbstractChild(val intMsg: Int) :
 
 data class ThirdAbstractChild (val strMsg: ChildEnum):
     BaseTypeAbstract(BaseType.ThirdType)
+
 
 enum class ChildEnum {
     JustOneEnum

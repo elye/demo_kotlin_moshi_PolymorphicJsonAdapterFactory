@@ -9,17 +9,17 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import java.lang.reflect.ParameterizedType
 
 fun main() {
-    simpleBase()
-    simpleAbstract()
-    simpleInterface()
-    sealedBase()
-    sealedInterfaceBase()
-
-    sealedInterfaceTypeBase()
+//    simpleBase()
+//    simpleAbstract()
+//    simpleInterface()
+//    sealedBase()
+//    sealedInterfaceBase()
+//
+//    sealedInterfaceTypeBase()
     abstractTypeBase()
 
-    normalMoshiSerialization()
-    abstractMoshiSerialization()
+//    normalMoshiSerialization()
+//    abstractMoshiSerialization()
 //    singleAbstractMoshiSerialization()
 }
 
@@ -77,7 +77,8 @@ private fun abstractTypeBase() {
             PolymorphicJsonAdapterFactory.of(BaseTypeAbstract::class.java, "type")
                 .withSubtype(FirstAbstractChild::class.java, BaseType.FirstType.name)
                 .withSubtype(SecondAbstractChild::class.java, BaseType.SecondType.name)
-                .withSubtype(ThirdAbstractChild::class.java, BaseType.ThirdType.name))
+                .withSubtype(ThirdAbstractChild::class.java, BaseType.ThirdType.name)
+                .withDefaultValue(FirstAbstractChild("Unknown")))
         .add(KotlinJsonAdapterFactory()).build()
     val adaptor: JsonAdapter<BaseTypeAbstract> = moshi.adapter(BaseTypeAbstract::class.java)
 
@@ -107,6 +108,18 @@ private fun abstractTypeBase() {
     val adaptorList: JsonAdapter<List<BaseTypeAbstract>> = moshi.adapter(type)
 
     println("List Children ${adaptorList.toJson(baseItems)}")
+
+    // Try to get unknown entity triggered with Forth type
+    val json = """
+    [   
+        {"type":"FirstType","strMsg":"Hi"},
+        {"type":"SecondType","intMsg":1},
+        {"type":"ForthType","strMsg":"JustOneEnum"}
+    ]
+    """.trimIndent()
+
+    val withDefaulEntityTriggered = adaptorList.fromJson(json)
+    println(withDefaulEntityTriggered)
     println()
 }
 
